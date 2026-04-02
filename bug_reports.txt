@@ -1,0 +1,80 @@
+Title: Field “Member Since Date” marked as mandatory with red asterisks *
+
+Preconditions:
+1. User is logged in with standard member details access
+2. Member exists with a subscription start date
+3. Member details page is open
+4. Personal tab is selected
+
+Steps to Reproduce:
+1. Navigate to the member details page
+2. Open the Personal tab
+3. Observe the “Member Since Date” field 
+
+Actual Result:
+“Member Since Date” is marked with red asterisks (*) 
+
+Expected Result:
+“Member Since Date” field is displayed a subscription start date
+
+Severity: Medium
+
+Priority: Medium
+
+Assignee: Development team lead
+
+
+
+Title: Member Since is set by Creation Date
+
+Preconditions:
+1. User is logged in with standard member details access
+2. Member exists with a subscription start date
+3. Member details page is open
+4. Personal tab is selected
+
+Steps to Reproduce:
+1. Create a new member or open an existing member record
+2. Create a new subscription with a subscription start date
+3. Open the Personal tab on the member details page
+4. Check the “Member Since Date” value
+
+Actual Result:
+“Member Since Date” is populated from the record creation date 
+
+Expected Result:
+“Member Since Date” is populated from the record subscription start date 
+
+Severity: Medium
+
+Priority: High
+
+Assignee: Development team lead
+
+
+
+Title: Every time user updates Subscription information and save - Member Since Date changes to current date
+
+Preconditions:
+1. User is logged in with standard member details access
+2. Member exists with a subscription start date
+3. Member details page is open
+4. Personal tab is selected
+
+Steps to Reproduce:
+1. Open the Personal tab on the member details page
+2. Change the “Member Since Date” value (e.g. 01/01/2026)
+3. Save
+4. Pay yor attention to “Member Since Date” value
+
+Actual Result:
+Current date is displayed in “Member Since Date” field after saving
+
+Expected Result:
+“Member Since Date” is displayed the correct date that has been chosen by user after saving
+
+Severity: High
+
+Priority: Medium
+
+Assignee: Development team lead

@@ -1,0 +1,80 @@
+Feature: Member Since date - move to Personal Info, no special permission needed 
+As a user
+I want “Member Since Date” to copy from subscription start date
+I want it editable on member details Personal tab
+I want a validation rule supporting ±100 years (not including current year)
+I want only existing member page permission, no extra role
+
+Background: 
+Given I am logged in with the standard member details role
+And a member exists with a subscription start date
+And I navigate to the member details page
+And I open the Personal tab
+
+Scenario 1: Initial copy from subscription start date
+When I create a new subscription for member 
+And I open the Personal tab for that member
+Then “Member Since Date” should be equal the beginning date from the subscription
+And the field should be visible
+And the field should be editable
+
+Scenario 2: Edit member since date without extra role
+Given “Member Since Date” is "2023-01-01"
+When I change “Member Since Date” to "2024-02-15"
+And I save changes
+Then “Member Since Date” should show "2024-02-15"
+And I should see no permission error
+
+Scenario 3: Accept boundary date 100 years in past (not current year)
+Given “Member Since Date” is "2023-01-01"
+When I set “Member Since Date” to "1923-01-01"
+And I save changes
+Then the value should be accepted
+And no validation message should display
+
+Scenario 4: Accept boundary date 100 years in future (not current year)
+Given “Member Since Date” is "2023-01-01"
+When I set “Member Since Date” to "2123-01-01"
+And I save changes
+Then the value should be accepted
+And no validation message should display
+
+Scenario 5: Reject date in current year
+Given “Member Since Date” is "2023-01-01"
+When I set “Member Since Date” to "2026-03-01"
+And I save changes
+Then I should see "Please enter a valid “Member Since Date”"
+
+Scenario 6: Reject >100 years past
+Given “Member Since Date” is "2023-01-01"
+When I set “Member Since Date” to "1922-12-31"
+And I save changes
+Then I should see "Please enter a valid “Member Since Date”"
+
+Scenario 7: Reject >100 years future
+Given “Member Since Date” is "2023-01-01"
+When I set “Member Since Date” to "2123-02-01"
+And I save changes
+Then I should see "Please enter a valid “Member Since Date”"
+
+Scenario 8: Reject invalid format date
+When I set “Member Since Date” to "invalid-date"
+And I save changes
+Then I should see "Please enter a valid “Member Since Date”"
+
+Scenario 9: No extra role needed to edit Personal tab date
+Given I have standard member details access (no extra security role)
+When I open Personal tab
+Then “Member Since Date” is editable
+
+Scenario 10: Unauthorized role should not edit
+Given I am logged in with a view-only member details role
+When I open Personal tab
+Then “Member Since Date” is read-only or unavailable for edit
+
+Scenario 11: Validation message if empty mandatory date
+When “Member Since Date” is cleared
+And I save
+Then I should see "Please enter a valid “Member Since Date”"
+
+    
