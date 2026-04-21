@@ -7,7 +7,6 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 
-# Other files
-AutomationTask/txt_file.txt
+
 
 
